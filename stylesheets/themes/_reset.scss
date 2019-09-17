@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Livvic:300i,600,700i&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    font-size: 62.5%;
+
+}
+
+
+body {
+    position: relative;
+    font-family: 'Livvic', sans-serif;
+    overflow: hidden;
+    font-size: 1.6rem;
+}
+
+@include mediaQuery(medium) {
+    html {
+        font-size: 80.5%;
+    }
+
+}
+
+@include mediaQuery(large) {
+    html {
+        font-size: 100.5%;
+    }
+
+}

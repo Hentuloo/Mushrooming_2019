@@ -1,0 +1,132 @@
+.settings {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 3fr 1fr auto;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-color: $bg-color;
+    z-index: 10;
+    // padding: 10vh 20px;
+
+    @include mediaQuery(small) {
+        padding: 0px 15vw;
+
+    }
+
+    @include mediaQuery(medium) {
+        padding: 0px 25vw;
+    }
+
+    &__title {
+        text-align: center;
+        font-size: map-get($font, xl);
+        text-transform: uppercase;
+    }
+
+    &__players {
+        width: 100%;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+    }
+
+    &__player {
+        width: 100%;
+        min-height: 80px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 20px;
+        margin: 0px auto;
+        border: 1px $black solid;
+
+        @include mediaQuery(small) {
+            border: none;
+        }
+    }
+
+    &__player-color {
+        width: 35px;
+        height: 35px;
+        background-color: black;
+        border-radius: 50%;
+        margin: 0px auto;
+
+        &--blue {
+            background-color: $blue;
+        }
+
+        &--green {
+            background-color: $green;
+        }
+
+        &--pink {
+            background-color: $pink;
+        }
+
+        @include mediaQuery(small) {
+            margin: auto;
+        }
+    }
+
+    &__player-checkbox {
+        margin: auto 5px;
+        width: 25px;
+        height: 25px;
+    }
+
+    &__player-name,
+    &__player-types,
+    &__player-keyCode {
+        flex-grow: 1;
+        margin: 4px 10px;
+        min-height: 40px;
+        background-color: $gray;
+        border: none;
+
+        @include mediaQuery(small) {
+            font-size: map-get($font, m);
+        }
+    }
+
+    &__player-name {
+        padding-left: 15px;
+    }
+
+    &__player-types {}
+
+    &__player-keyCode {
+        border: 2px $gray-dark solid;
+        padding: 4px;
+    }
+
+    &__game {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 20px;
+        width: 60%;
+        margin: 0px auto;
+
+
+        .settings__game-text {
+            align-self: center;
+        }
+
+        .settings__game-select {
+            background-color: $gray;
+            border: none;
+            padding: 10px;
+        }
+
+        .settings__game-option {}
+    }
+
+    &__button {
+        margin: 10px auto;
+        padding: 10px 40px;
+    }
+}

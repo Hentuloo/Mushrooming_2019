@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Mushrooms game</title>
+
+        <link rel="stylesheet" href="./stylesheets/main.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Livvic:300,500,700i&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <main class="main">
+            <section class="introduction swipper-element">
+                <img data-src="./assets/images/logo.png" class="introduction__image" alt="Grzybobranie logo gry">
+                <button type="button" class="button introduction__button button-next-section button--border-green">
+                    <span class="button__text">Zagraj teraz!</span>
+                </button>
+            </section>
+            <section class="rules swipper-element">
+                <div class="rules__item">
+                    <div class="rules__image-wrapper">
+                    <img data-src="./assets/images/dice.png" class="rules__image" alt="Kostka do gry">
+                    </div>
+                    <h2 class="rules__title">Rzucanie kostką</h2>
+                    <p class="rules__description">Właściwie gra sprowadza się do rzucania kostką jest w pełni losowa</p>
+                </div>
+                <div class="rules__item">
+                    <div class="rules__image-wrapper">
+                    <img data-src="./assets/images/alert.png" class="rules__image"  alt="Wygląd powiadomienia">
+                    </div>
+                    <h2 class="rules__title">Wyjątkowe pola</h2>
+                    <p class="rules__description">Gracz zależnie od rodzaju pola dostaje bonus bądź karę</p>
+                </div>
+                </section>
+                <section class="rules rules--three-in-column rules--card-mood-for-desktop swipper-element">
+                <div class="rules__item">
+                    <div class="rules__image-wrapper">
+                    <img data-src="./assets/images/mushroomGood.png" class="rules__image" alt="Wygląd przedmiotu w grze: dobry grzyb">
+                    </div>
+                    <h2 class="rules__title">Zbieranie borowików</h2>
+                    <p class="rules__description">Borowik generuje +4 punkty</p>
+                </div>
+                <div class="rules__item">
+                    <div class="rules__image-wrapper">
+                    <img data-src="./assets/images/raspberry.png" class="rules__image" alt="Wygląd przedmiotu w grze: borówka">
+                    </div>
+                    <h2 class="rules__title">Zbieranie jagódek</h2>
+                    <p class="rules__description">Borowik generuje +3 punkty</p>
+                </div>
+                <div class="rules__item">
+                    <div class="rules__image-wrapper">
+                    <img data-src="./assets/images/mushroomWrong.png" class="rules__image" alt="Wygląd przedmiotu w grze: zły grzyb">
+                    </div>
+                    <h2 class="rules__title">Zbieranie muchomorów</h2>
+                    <p class="rules__description">Muchomor generuje -6 punktów</p>
+                </div>
+            </section>
+            <section class="settings swipper-element">
+                <h3 class="settings__title">Ustawienia</h3>
+                <div class="settings__players">
+                    <div class="settings__player">
+                        <div data-value="blue" class="settings__player-color settings__player-color--blue"></div>
+                        <input type="checkbox" class="settings__player-checkbox" checked>
+                        <input type="text" class="settings__player-name" placeholder="Nazwa gracza">
+                        <select class="settings__player-types">
+                            <option value="user" class="settings__player-type">Użytkownik</option>
+                            <option value="computer" class="settings__player-type">Komputer</option>
+                        </select>
+                        <button type="button" class="settings__player-keyCode">Klawisz klawiatury</button>
+                    </div>
+                    <div class="settings__player">
+                        <div  data-value="green" class="settings__player-color settings__player-color--green"></div>
+                        <input type="checkbox" class="settings__player-checkbox" checked>
+                        <input type="text" class="settings__player-name" placeholder="Nazwa gracza">
+                        <select class="settings__player-types">
+                            <option value="user" class="settings__player-type">Użytkownik</option>
+                            <option value="computer" class="settings__player-type">Komputer</option>
+                        </select>
+                        <button type="button" class="settings__player-keyCode">Klawisz klawiatury</button>
+                    </div>
+                    <div class="settings__player">
+                        <div data-value="pink" class="settings__player-color settings__player-color--pink"></div>
+                        <input type="checkbox" class="settings__player-checkbox">
+                        <input type="text" class="settings__player-name" placeholder="Nazwa gracza">
+                        <select class="settings__player-types">
+                            <option value="user" class="settings__player-type">Użytkownik</option>
+                            <option value="computer" class="settings__player-type">Komputer</option>
+                        </select>
+                        <button type="button" class="settings__player-keyCode">Klawisz klawiatury</button>
+                    </div>
+                </div>
+                <div class="settings__game">
+                    <label for="settings__spead-select" class="settings__game-text">Szybkość gry:</label>
+                    <select id="settings__spead-select" class="settings__game-select">
+                        <option class="settings__game-option" value="slow">Wolna</option>
+                        <option  class="settings__game-option" value="normal" selected="selected">Normalna</option>
+                        <option class="settings__game-option" value="fast">Szybka</option>
+                    </select>
+                    <label for="settings__mood-select" class="settings__game-text">Tryb gry:</label>
+                    <select id="settings__mood-select" class="settings__game-select">
+                        <option class="settings__game-option" value="normal">Więcej punktów</option>
+                        <option class="settings__game-option" value="firstWin">Kto szybszy</option>
+                    </select>
+                    <label for="settings__effects-select" class="settings__game-text">Efekty specjalne:</label>
+                    <select id="settings__effects-select" class="settings__game-select">
+                        <option class="settings__game-option" value="true">Włącz animacje</option>
+                        <option class="settings__game-option" value="false">Wyłącz animacje</option>
+                    </select>
+                </div>
+                <button type="button" class="button settings__button settings__button--start ">
+                    <span class="button__text">Rozpocznij grę</span>
+                </button>
+            </section>
+            <section class="game game--map-only">
+                <div class="game__map-wrapper">
+                <div class="game__map-items-wrapper">
+                    <img data-src="./assets/images/map.png" alt="Mapa gry" class="game__map" />
+                </div>
+                </div>
+                    <div class="game__interface-top-bar"></div>
+                    <div class="alert alert--hide game__alert">
+                        <h2 class="alert__title"></h2>
+                        <p class="alert__description"></p>
+                        <div class="alert__left-bars"></div>
+                        <div class="alert__right-bars"></div>
+                        <button type="button" class="alert__button-close">
+                            Graj dalej!
+                        </button>
+                    </div>
+                        <div class="dice game__dice" >
+                            <button type="button" class="dice__button" >
+                                <span
+                                    class="dice__button-span dice__button-span--hide "
+                                    >Rzuć kostką</span
+                                >
+                            </button>
+                            <span class="dice__number"></span>                             
+                        </div>             
+                </div>
+                <div class="game__gif-container game__gif-container--hide">
+                    <img class="game__gif-image" alt="Kostka do gry">
+                    <span class="game__gif-number game__gif-number--hide">2</span>
+                </div>
+            <img data-src="./assets/images/arrowNavigation.png"  class="game__arrow-navigation" alt="Element z możliwością nawigacji" />
+            </section>
+            <button type="button" class="button button--arrow button-next-section arrow-next-section main__fixed-button">
+                <span class="button__text button__text--hiden">Następna sekcja</span>
+                <img data-src="./assets/images/singleArrow.png" alt="strzałka w dół" class="button__image">
+            </button>
+        </main>
+    </body>
+    <script src="./scripts/settings/fieldsInit.js"></script>
+    <script src="./scripts/settings/gifsSettings.js"></script>
+    <script src="./scripts/components/GifAlert.js"></script>
+    <script src="./scripts/components/Alert.js"></script>
+    <script src="./scripts/components/Swipper.js"></script>
+    <script src="./scripts/components/game/SettingsPanel.js"></script>
+    <script src="./scripts/components/game/Fields.js"></script>
+    <script src="./scripts/components/game/BattleMap.js"></script>
+    <script src="./scripts/components/game/Pawn.js"></script>
+    <script src="./scripts/components/game/Dice.js"></script>
+    <script src="./scripts/components/game/SpecialFieldFunc.js"></script>
+    <script src="./scripts/components/game/MapSwipeMove.js"></script>
+    <script src="./scripts/components/LoadImages.js"></script>
+    <script src="./scripts/components/game/Game.js"></script>
+    <script src="./scripts/main.js"></script>
+</html>

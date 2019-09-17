@@ -1,0 +1,110 @@
+$bar-x: 2%;
+$bar-y: 4%;
+
+.alert {
+    display: grid;
+    justify-content: center;
+
+    grid-template-rows: 25% 1fr 35%;
+    background-color: $orange-first;
+    width: 80%;
+    height: 30%;
+    z-index: 10;
+    padding: 40px 20px;
+    border: 20px solid $orange-second;
+    font-size: map-get($font, m);
+    position: relative;
+    text-align: center;
+
+    &--hide {
+        display: none;
+    }
+
+    &__title {
+        margin: 10px auto;
+        max-width: 350px;
+        text-transform: uppercase;
+        font-size: map-get($font, l);
+        word-spacing: 15px;
+        font-weight: map-get($font, bold);
+    }
+
+    &__description {
+        font-weight: map-get($font, light);
+        align-self: center;
+
+    }
+
+    &__button-close {
+        display: block;
+        width: 200px;
+        min-height: 70px;
+        margin: 10px auto 10px auto;
+
+        background-color: transparent;
+        font-size: map-get($font, l);
+        font-weight: map-get($font, bold);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: $black;
+        border: 3px solid $white;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $orange-second;
+            color: $white;
+        }
+
+        @include mediaQuery(medium) {
+            width: 260px;
+
+        }
+    }
+
+
+    &__left-bars,
+    &__right-bars {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0%;
+        left: 0%;
+        z-index: -1;
+
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            top: $bar-y;
+            left: $bar-x;
+            border-left: 10px solid $white;
+            border-top: 10px solid $white;
+        }
+    }
+
+    &__left-bars {
+        &::after {
+            top: auto;
+            bottom: $bar-y;
+            transform: rotate(-90deg);
+        }
+    }
+
+    &__right-bars {
+        &::after {
+            left: auto;
+            right: $bar-x;
+            transform: rotate(90deg);
+        }
+
+        &::before {
+            left: auto;
+            right: $bar-x;
+            top: auto;
+            bottom: $bar-y;
+            transform: rotate(180deg);
+        }
+    }
+}

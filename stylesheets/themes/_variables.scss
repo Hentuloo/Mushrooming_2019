@@ -1,0 +1,35 @@
+$white:rgb(255, 255, 255);
+$black:rgb(0, 0, 0);
+$bg-color: rgb(255, 255, 255);
+
+$black-opacity:rgba(0, 0, 0, 0.301);
+
+$green-second:rgb(179, 206, 145);
+$green-third:rgb(87, 129, 87);
+
+$green:rgb(63, 138, 73);
+$blue:rgb(58, 92, 134);
+$pink:rgb(177, 59, 126);
+$red:rgb(160, 46, 46);
+$gray:rgb(235, 235, 235);
+$gray-dark:rgb(105, 105, 105);
+
+$orange-first:rgb(243, 214, 160);
+$orange-second:rgb(124, 101, 57);
+
+$font:(xs:1rem,
+    s:1.3rem,
+    m:1.6rem,
+    l:2rem,
+    xl:2.4rem,
+    xxxl:5.4rem,
+    bold:700,
+    medium:500,
+    light:300,
+);
+$breakpoints:(xsmall:'(min-width: 460px)',
+    small:'(min-width: 800px)',
+    medium:'(min-width:1024px)',
+    large:'(min-width:1200px)',
+    xlarge:'(min-width:1400px)',
+)

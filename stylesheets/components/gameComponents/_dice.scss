@@ -1,0 +1,49 @@
+.dice {
+
+    &__button {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 60%;
+            top: 0%;
+            left: 0%;
+
+            background-image: url(../assets/images/dice.png);
+            background-size: 100% 100%;
+            transition: 0.2s;
+
+        }
+
+
+        @at-root .dice--throw-animation {
+            .dice__button::after {
+                animation: jump 0.3s ease-in infinite alternate;
+            }
+        }
+    }
+
+    &__button-span {
+        &--hide {
+            display: none;
+        }
+    }
+
+    &__number {
+        display: block;
+        transform: translate(0%, -155%);
+        font-size: map-get($font, xl);
+        z-index: 11;
+
+        @include mediaQuery(medium) {
+            transform: translate(10%, -125%);
+        }
+    }
+}

@@ -1,0 +1,45 @@
+.introduction {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+
+
+    @include mediaQuery(small) {
+        width: 40vw;
+        background-image: url('../assets/images/mushroomPatern.png');
+        background-size: 30% 20%;
+        background-position: -10% -10%;
+
+    }
+
+    &__button {
+        position: absolute;
+        left: 6%;
+        bottom: 7%;
+        z-index: 12;
+
+        @include mediaQuery(small) {
+            left: 50%;
+            bottom: 10%;
+            transform: translate(-50%, 0%);
+        }
+    }
+
+    &__image {
+        position: absolute;
+        width: 300px;
+        left: calc(50% - 150px);
+        top: 3%;
+        z-index: 12;
+
+        @include mediaQuery(small) {
+            background-color: $white;
+            box-shadow: 0px 0px 90px 52px rgba(255, 255, 255, 1);
+        }
+
+        @include mediaQuery(large) {
+            width: 400px;
+        }
+    }
+}

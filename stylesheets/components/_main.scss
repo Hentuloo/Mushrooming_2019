@@ -1,0 +1,13 @@
+.main {
+    background-color: $bg-color;
+
+    &__fixed-button {
+        position: fixed;
+        bottom: 2%;
+        right: 5%;
+
+        @include mediaQuery(small) {
+            left: 4%;
+        }
+    }
+}
