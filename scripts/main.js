@@ -1,30 +1,30 @@
+import Settings from './settings/Settings.js';
+import StartGame from './StartGame.js';
+
 window.onbeforeunload = function() {
     window.scrollTo(0, 0);
 };
 document.addEventListener('DOMContentLoaded', () => {
-    let gameInstance = new Game();
-    const settings = new SettingsPanel();
-    const swipper = new Swipper();
-    // on swipper
-    swipper.changeScrollFlag(true);
+    const {
+        swiperConfig,
+        generalConfig,
+        initialGameSettings,
+        gifConfig,
+        batleMapConfig,
+        diceConfig,
+        alertConfig,
+        pawnConfig,
+        mapSwipeMoveConfig,
+    } = Settings;
 
-    const startButton = document.querySelector('.settings__button--start');
+    // turn on swipper
+    const swipperInstantion = new Swipper(swiperConfig);
+    swipperInstantion.changeScrollFlag(true);
 
-    startGame = () => {
-        // of swipper
-        swipper.changeScrollFlag(false);
-        const settingsValues = settings.geAllSettingsFromPage();
-        console.log(settingsValues);
+    //turn on page swipe on map(movment map)
+    new MapSwipeMove(mapSwipeMoveConfig);
 
-        //settings validator (coming soon)
-        if (!settingsValues.players.length) return;
-
-        gameInstance.initialStartGame(settingsValues);
-        startButton.removeEventListener('click', startGame);
-    };
-
-    startButton.addEventListener('click', startGame);
-
+    //load all images in first that:
     const loadImagesInstantion = new LoadImages();
     loadImagesInstantion.imagesPushFirst([
         './assets/images/logo.png',
@@ -32,4 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
         './assets/images/map.png',
     ]);
     loadImagesInstantion.loadSync();
+
+    let gameInstance = new Game({
+        gifConfig,
+        batleMapConfig,
+        diceConfig,
+        alertConfig,
+        initialGameSettings,
+        pawnConfig,
+    });
+
+    new StartGame({ generalConfig, gameInstance, swipperInstantion });
 });

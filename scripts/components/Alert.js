@@ -1,6 +1,12 @@
 class Alert {
-    constructor(alertContainer) {
-        const _alertWrapper = alertContainer;
+    constructor({
+        wrapper,
+        buttonCloseClass,
+        titleClass,
+        description,
+        hideClass,
+    }) {
+        const _alertWrapper = wrapper;
         let _active = false;
 
         this.alertTitle;
@@ -15,7 +21,7 @@ class Alert {
         };
         this.newAlert = field => {
             //add Event listener on Accept alert
-            const button = _alertWrapper.querySelector('.alert__button-close');
+            const button = _alertWrapper.querySelector(buttonCloseClass);
             button.addEventListener('click', this.buttonClicked);
 
             _active = true;
@@ -27,22 +33,22 @@ class Alert {
         this.updateAlert = () => {
             if (this.alertTitle) {
                 _alertWrapper.querySelector(
-                    '.alert__title',
+                    titleClass,
                 ).innerText = this.alertTitle;
             }
             if (this.alertContent) {
                 _alertWrapper.querySelector(
-                    '.alert__description',
+                    description,
                 ).innerText = this.alertContent;
             }
             if (this.alertButton) {
                 _alertWrapper.querySelector(
-                    '.alert__button-close',
+                    buttonCloseClass,
                 ).innerText = this.alertButton;
             }
             _active
-                ? _alertWrapper.classList.remove('alert--hide')
-                : _alertWrapper.classList.add('alert--hide');
+                ? _alertWrapper.classList.remove(hideClass)
+                : _alertWrapper.classList.add(hideClass);
         };
         this.gameEndAlert = ({ results, firstWon }) => {
             if (results) {
@@ -62,9 +68,7 @@ class Alert {
 
                 this.updateAlert();
 
-                const button = _alertWrapper.querySelector(
-                    '.alert__button-close',
-                );
+                const button = _alertWrapper.querySelector(buttonCloseClass);
                 button.addEventListener('click', this.buttonClicked);
             }
         };

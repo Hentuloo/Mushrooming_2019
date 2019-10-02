@@ -1,11 +1,34 @@
 class SettingsPanel {
-    constructor() {
-        this.players = [...document.querySelectorAll('.settings__player')];
-        this.game = document.querySelector('.settings__game');
+    constructor({
+        players,
+        game,
+        keyButtons,
+        checkboxClass,
+        colorClass,
+        nickClass,
+        typeClass,
+        keyCodeClass,
+        speedClass,
+        gameTypeClass,
+        specialEffectsClass,
+        keyButtonDefault,
+    }) {
+        this.containerClassses = {
+            checkboxClass,
+            colorClass,
+            nickClass,
+            typeClass,
+            keyCodeClass,
+            speedClass,
+            gameTypeClass,
+            specialEffectsClass,
+            keyButtonDefault,
+        };
 
-        this.playersKeyButtons = [
-            ...document.querySelectorAll('.settings__player-keyCode'),
-        ];
+        this.players = players;
+        this.game = game;
+
+        this.playersKeyButtons = keyButtons;
 
         this.playersKeyButtons.forEach(playerButton =>
             playerButton.addEventListener('click', () =>
@@ -24,16 +47,21 @@ class SettingsPanel {
                 uniqueId = players.find(player => player.id === id);
             } while (uniqueId !== undefined);
 
-            const active = player.querySelector('.settings__player-checkbox');
+            const active = player.querySelector(
+                this.containerClassses.checkboxClass,
+            );
             if (active.checked) {
-                const color = player.querySelector('.settings__player-color')
-                    .dataset.value;
-                const nick = player.querySelector('.settings__player-name')
-                    .value;
-                const type = player.querySelector('.settings__player-types')
-                    .value;
+                const color = player.querySelector(
+                    this.containerClassses.colorClass,
+                ).dataset.value;
+                const nick = player.querySelector(
+                    this.containerClassses.nickClass,
+                ).value;
+                const type = player.querySelector(
+                    this.containerClassses.typeClass,
+                ).value;
                 const keyCode = player.querySelector(
-                    '.settings__player-keyCode',
+                    this.containerClassses.keyCodeClass,
                 ).dataset.keyCode;
                 players.push({
                     id,
@@ -47,10 +75,13 @@ class SettingsPanel {
         return players;
     };
     gameSettings = () => {
-        const speed = this.game.querySelector('#settings__spead-select').value;
-        const type = this.game.querySelector('#settings__mood-select').value;
+        const speed = this.game.querySelector(this.containerClassses.speedClass)
+            .value;
+        const type = this.game.querySelector(
+            this.containerClassses.gameTypeClass,
+        ).value;
         const specialEffects = this.game.querySelector(
-            '#settings__effects-select',
+            this.containerClassses.specialEffectsClass,
         ).value;
         return { speed, type, special: specialEffects == 'true' };
     };
@@ -60,7 +91,7 @@ class SettingsPanel {
     });
 
     chooseKeyClicked = element => {
-        element.innerText = 'Wybierz klawisz';
+        element.innerText = this.containerClassses.keyButtonDefault;
 
         const myListener = event => {
             window.removeEventListener('keydown', myListener);

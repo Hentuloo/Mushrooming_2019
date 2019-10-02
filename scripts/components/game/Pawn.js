@@ -1,5 +1,16 @@
 class Pawn {
-    constructor(player, pawnStatWrapper, fieldsWrappers, gameSpeed) {
+    constructor({
+        player,
+        interfaceWrapper,
+        fieldsWrappers,
+        gameSpeed,
+        statActiveClass,
+        pawnActiveClass,
+        statScore,
+        statItems,
+        statImgItems,
+        statDiv: { containerClass, scoreClass, nameClass, circle },
+    }) {
         //pawn values
         const _id = player.id;
         const _type = player.type;
@@ -12,7 +23,7 @@ class Pawn {
         let _extraPoints = 0;
 
         //pawn statistic panel
-        const _pawnStatWrapper = pawnStatWrapper;
+        const _pawnStatWrapper = interfaceWrapper;
         let _pawnStatSelf;
         let _pawnActive = false;
 
@@ -43,22 +54,21 @@ class Pawn {
                     block: 'center',
                     inline: 'center',
                 });
-                _pawnStatSelf.classList.add('pawn-stat--active');
-                _pawnElement.classList.add('game__item-pawn--active');
+                _pawnStatSelf.classList.add(statActiveClass);
+                _pawnElement.classList.add(pawnActiveClass);
             } else {
-                _pawnStatSelf.classList.remove('pawn-stat--active');
-                _pawnElement.classList.remove('game__item-pawn--active');
+                _pawnStatSelf.classList.remove(statActiveClass);
+                _pawnElement.classList.remove(pawnActiveClass);
             }
             //update score
             _points = 0;
             _mushrooms.forEach(mushroom => (_points += mushroom.value));
-            _pawnStatSelf.querySelector('.pawn-stat__score').innerText =
+            _pawnStatSelf.querySelector(statScore).innerText =
                 _points + _extraPoints;
 
             //update items
-            const pawnStatItems = _pawnStatSelf.querySelector(
-                '.pawn-stat__items',
-            );
+            const pawnStatItems = _pawnStatSelf.querySelector(statItems);
+
             if (_mushrooms.length !== pawnStatItems.childNodes.length) {
                 //remove all mushrooms (images) from .pawn-stat__items
                 while (pawnStatItems.hasChildNodes()) {
@@ -68,7 +78,7 @@ class Pawn {
                 _mushrooms.forEach(mushroom => {
                     const mushroomImg = document.createElement('img');
                     mushroomImg.setAttribute('src', mushroom.src);
-                    mushroomImg.setAttribute('class', 'pawn-stat__items-img');
+                    mushroomImg.setAttribute('class', statImgItems);
                     pawnStatItems.appendChild(mushroomImg);
                 });
             }
@@ -154,16 +164,16 @@ class Pawn {
         };
         this.firstTimeDrawStatPanel = () => {
             const pawnStatElement = document.createElement('div');
-            pawnStatElement.setAttribute('class', 'pawn-stat game__pawn-stat');
+            pawnStatElement.setAttribute('class', containerClass);
 
             //score
             const pawnScore = document.createElement('div');
-            pawnScore.setAttribute('class', 'pawn-stat__score');
+            pawnScore.setAttribute('class', scoreClass);
             pawnStatElement.appendChild(pawnScore);
 
             //name
             const pawnName = document.createElement('div');
-            pawnName.setAttribute('class', 'pawn-stat__name');
+            pawnName.setAttribute('class', nameClass);
             pawnName.textContent = _pawnName;
             pawnStatElement.appendChild(pawnName);
 
@@ -171,13 +181,13 @@ class Pawn {
             const pawnCircle = document.createElement('div');
             pawnCircle.setAttribute(
                 'class',
-                `pawn-stat__circle pawn-stat__circle--${_pawnColor}`,
+                `${circle} ${circle}--${_pawnColor}`,
             );
             pawnStatElement.appendChild(pawnCircle);
 
             //item container
             const pawnItems = document.createElement('div');
-            pawnItems.setAttribute('class', 'pawn-stat__items');
+            pawnItems.setAttribute('class', statItems.slice(1));
             pawnStatElement.appendChild(pawnItems);
 
             _pawnStatSelf = pawnStatElement;

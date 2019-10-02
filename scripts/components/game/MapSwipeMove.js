@@ -1,6 +1,6 @@
 class MapSwipeMove {
-    constructor() {
-        const _container = document.querySelector('.game__map-items-wrapper');
+    constructor({ container, transitionClass }) {
+        const _container = container;
         let _active = false;
 
         let initialClientX = null;
@@ -59,13 +59,11 @@ class MapSwipeMove {
                     0 ||
                 boxPosition.right + borderScreenLimit < window.innerWidth
             ) {
-                _container.classList.add('game__map-items-wrapper--transition');
+                _container.classList.add(transitionClass);
 
                 _container.style.transform = `translate(${_initialContainerPosition.left}px,${_initialContainerPosition.top}px)`;
                 setTimeout(() => {
-                    _container.classList.remove(
-                        'game__map-items-wrapper--transition',
-                    );
+                    _container.classList.remove(transitionClass);
                 }, 200);
 
                 return;
@@ -81,4 +79,3 @@ class MapSwipeMove {
         _container.addEventListener('touchmove', this.mapClickMove);
     }
 }
-new MapSwipeMove();

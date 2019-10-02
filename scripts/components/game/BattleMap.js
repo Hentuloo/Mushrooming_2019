@@ -1,8 +1,16 @@
 class BattleMap {
-    constructor(gameMapContainer, mapImage, fields) {
-        this.gameContainer = gameMapContainer;
-        this.image = mapImage;
-        let _fields = fields;
+    constructor({
+        wrapper,
+        map,
+        fieldsInstantion,
+        itemWrapperClass,
+        itemClass,
+    }) {
+        this.gameContainer = wrapper;
+        this.image = map;
+        let _fields = fieldsInstantion;
+        this.itemWrapperClass = itemWrapperClass;
+        this.itemClass = itemClass;
 
         //create wrappers for any field
         this.fieldsWrappers = this.createFieldsElementsInDOM(
@@ -47,7 +55,7 @@ class BattleMap {
             /// do some work;
             this.fieldsWrappers = fields.map(field => {
                 const fieldDiv = document.createElement('div');
-                fieldDiv.setAttribute('class', 'game__item-wrapper');
+                fieldDiv.setAttribute('class', this.itemWrapperClass);
                 fieldDiv.setAttribute('data-fieldId', field.index);
                 // fieldDiv.textContent = field.index;
 
@@ -77,7 +85,7 @@ class BattleMap {
             itemImg.push(document.createElement('img'));
 
             itemImg[i].setAttribute('src', imageSrc);
-            itemImg[i].setAttribute('class', 'game__item-image');
+            itemImg[i].setAttribute('class', this.itemClass);
             itemImg[i].dataset.itemType = 'plant';
             if (alt) {
                 itemImg[i].setAttribute('alt', alt);

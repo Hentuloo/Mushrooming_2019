@@ -1,10 +1,13 @@
 class Dice {
-    constructor(diceElement, buttonElement, numberElement) {
-        this.diceElement = diceElement;
-        this.numberElement = numberElement;
-        this.buttonElement = buttonElement;
+    constructor({ container, button, number, animationClass, classContainer }) {
+        this.diceElement = container;
+        this.numberElement = number;
+        this.buttonElement = button;
         let _number = null;
         let _diceStatus = false;
+
+        this.animationClass = animationClass;
+        this.classContainer = classContainer;
 
         let _numberFlag = true;
 
@@ -16,7 +19,9 @@ class Dice {
         this.setAnimation = () =>
             this.diceElement.setAttribute(
                 'class',
-                `dice game__dice ${_diceStatus ? 'dice--throw-animation' : ''}`,
+                `${this.classContainer} ${
+                    _diceStatus ? this.animationClass : ''
+                }`,
             );
         this.throw = () => {
             if (_diceStatus) {

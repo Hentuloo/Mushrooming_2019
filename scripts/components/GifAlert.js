@@ -1,11 +1,19 @@
 class GifAlert {
-    constructor(gifs, gifContainer, gifImage, gifNumberElement) {
+    constructor({
+        settings,
+        container,
+        image,
+        number,
+        gifContainerClass,
+        numberHideClass,
+        containerHideClass,
+    }) {
         let _enableGifs = true;
 
-        const _gifs = gifs;
-        const _gifContainer = gifContainer;
-        const _gifImage = gifImage;
-        const _gifNumber = gifNumberElement;
+        const _gifs = settings;
+        const _gifContainer = container;
+        const _gifImage = image;
+        const _gifNumber = number;
         let _active = true;
         let _gifsQueue = [];
 
@@ -66,9 +74,9 @@ class GifAlert {
             }
             if (this.number) {
                 _gifNumber.innerText = this.number;
-                _gifNumber.classList.add('game__gif-number--hide');
+                _gifNumber.classList.add(numberHideClass);
                 setTimeout(() => {
-                    _gifNumber.classList.remove('game__gif-number--hide');
+                    _gifNumber.classList.remove(numberHideClass);
                 }, 200);
             } else {
                 _gifNumber.innerText = '';
@@ -81,19 +89,19 @@ class GifAlert {
             ) {
                 _gifContainer.setAttribute(
                     'class',
-                    `game__gif-container 
-                    ${!_active ? 'game__gif-container--hide' : ''}`,
+                    `${gifContainerClass}
+                    ${!_active ? containerHideClass : ''}`,
                 );
             } else {
                 _gifContainer.classList.add(
-                    `game__gif-container--${this.containerModifier}`,
+                    `${gifContainerClass}--${this.containerModifier}`,
                 );
             }
 
             //remove --hide when is active
             _active
-                ? _gifContainer.classList.add('game__gif-container--hide')
-                : _gifContainer.classList.remove('game__gif-container--hide');
+                ? _gifContainer.classList.add(containerHideClass)
+                : _gifContainer.classList.remove(containerHideClass);
         };
         this.changeEnable = flag => (_enableGifs = flag);
     }

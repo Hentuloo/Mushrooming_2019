@@ -1,6 +1,6 @@
 class Swipper {
-    constructor() {
-        this.sections = [...document.querySelectorAll('.swipper-element')];
+    constructor({ sections, buttons }) {
+        this.sections = sections;
 
         this.swipperActive = true;
 
@@ -10,7 +10,7 @@ class Swipper {
         this.swipteInitY = null;
         this.swipteInitX = null;
 
-        this.buttons = document.querySelectorAll('.button-next-section');
+        this.buttons = buttons;
         this.buttons.forEach(button =>
             button.addEventListener('click', () => this.swipe(1)),
         );

@@ -1,74 +1,77 @@
 class Game {
-    constructor() {
+    constructor({
+        gifConfig,
+        batleMapConfig,
+        diceConfig,
+        alertConfig,
+        initialGameSettings,
+        pawnConfig,
+    }) {
         // INITIAL SECTION - START
+
         //load fields
-        this.Fields = new Fields(fieldsInit); // fieldsInit from './settings/fieldsInit.js'
-
+        this.Fields = new Fields(fieldsInit);
         //load gift component
-        const _GifAlert = new GifAlert(
-            gifsSettings, // gifsSettings from './settings/gifsSettings.js'
-            document.querySelector('.game__gif-container'),
-            document.querySelector('.game__gif-image'),
-            document.querySelector('.game__gif-number'),
-        );
-
+        const _GifAlert = new GifAlert(gifConfig);
         //load map
-        const _BattleMap = new BattleMap(
-            document.querySelector('.game__map-items-wrapper'), //game map container
-            document.querySelector('.game__map'), //map-img
-            this.Fields.getAllProp(),
-        );
-
+        const _BattleMap = new BattleMap({
+            ...batleMapConfig,
+            fieldsInstantion: this.Fields.getAllProp(),
+        });
+        //load dice
+        const _Dice = new Dice(diceConfig);
+        //load special functions for special fields
+        const _SpecialEffectsFunctions = new SpecialFieldFunc();
+        //load Alert component
+        const _Alert = new Alert(alertConfig);
         //users
         this.players;
         let _activePlayer;
 
-        //load dice
-        const _Dice = new Dice(
-            document.querySelector('.game__dice'), //dice container
-            document.querySelector('.game__dice .dice__button'), //dice button
-            document.querySelector('.game__dice .dice__number'), // dice span number
-        );
-
         //First queue
         let _queue;
 
-        //load special functions for special fields
-        const _SpecialEffectsFunctions = new SpecialFieldFunc();
-
-        //load Alert component
-        const _Alert = new Alert(document.querySelector('.game__alert'));
+        let diceThrowedDelay = initialGameSettings.diceThrowedDelay;
+        const newRoundDelay = initialGameSettings.newRoundDelay;
+        let _gameType = initialGameSettings.gameType;
 
         //flag to signalize that next round can be call
         let _activeRound = true;
         let currentFieldSpecial;
-        let diceThrowedDelay = 800;
-        const newRoundDelay = 500;
-        let _gameType = 'normal';
         // INITIAL SECTION - END
 
         //initial game function (onclick start button in main.js)
-        this.initialStartGame = ({ settings, players }) => {
+        this.initialStartGame = ({
+            settings,
+            players,
+            interfaceBar,
+            gameSettings: {
+                gameContainer,
+                gameMapContainer,
+                mapOnlyClass,
+                startedClass,
+            },
+            arrowSettings: { arrowButton, hideClass },
+        }) => {
             //change map motive
-            document.querySelector('.game').classList.remove('game--map-only');
-            document.querySelector('.game').classList.add('game--started');
-            document
-                .querySelector('.button--arrow')
-                .classList.add('button--hidden');
+            gameContainer.classList.remove(mapOnlyClass);
+            gameContainer.classList.add(startedClass);
+
+            arrowButton.classList.add(hideClass);
 
             //reset transform
-            document.querySelector('.game__map-items-wrapper').style.transform =
-                'translate(0px,0px)';
+            gameMapContainer.style.transform = 'translate(0px,0px)';
 
             //get players
             this.players = players.map(
                 player =>
-                    new Pawn(
+                    new Pawn({
                         player,
-                        document.querySelector('.game__interface-top-bar'),
-                        _BattleMap.fieldsWrappers,
-                        settings.speed,
-                    ),
+                        interfaceWrapper: interfaceBar,
+                        fieldsWrappers: _BattleMap.fieldsWrappers,
+                        gameSpeed: settings.speed,
+                        ...pawnConfig,
+                    }),
             );
             this.players.forEach(player => {
                 player.drawPawn();
