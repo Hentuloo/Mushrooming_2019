@@ -1,3 +1,5 @@
+import scrollIntoView from 'scroll-into-view';
+
 class Pawn {
     constructor({
         player,
@@ -9,6 +11,7 @@ class Pawn {
         statScore,
         statItems,
         statImgItems,
+        gameMapContainer,
         statDiv: { containerClass, scoreClass, nameClass, circle },
     }) {
         //pawn values
@@ -17,6 +20,7 @@ class Pawn {
         const _fieldsWrappers = fieldsWrappers;
         const _pawnName = player.nick || `gracz: ${player.id}`;
         const _pawnColor = player.color;
+        this.gameMapContainer = gameMapContainer;
 
         let _mushrooms = [];
         let _points = 0;
@@ -41,18 +45,26 @@ class Pawn {
             }
         });
 
-        this.movementSpeed = chooseMovementSpeed();
+        this.movementSpeed = 10;
 
-        this.updateStatPanel = () => {
+        this.updateStatPanel = checkTop => {
             //create stat panel (in initial step)
             if (!_pawnStatSelf) this.firstTimeDrawStatPanel();
 
             //check the active flag
             if (_pawnActive) {
-                _activeFieldElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'center',
+                scrollIntoView(_activeFieldElement, {}, () => {
+                    if (!checkTop) {
+                        const {
+                            top,
+                        } = this.gameMapContainer.getBoundingClientRect();
+                        if (top > 0) {
+                            window.scrollTo({
+                                top: window.pageYOffset + top,
+                                behavior: 'smooth',
+                            });
+                        }
+                    }
                 });
                 _pawnStatSelf.classList.add(statActiveClass);
                 _pawnElement.classList.add(pawnActiveClass);
@@ -258,7 +270,7 @@ class Pawn {
         this.getPointsNumber = () => _points + _extraPoints;
         this.activeStatus = flag => {
             _pawnActive = flag;
-            if (flag) this.updateStatPanel();
+            if (flag) this.updateStatPanel(flag);
         };
         this.getId = () => _id;
         this.activeFieldNumber = () => _activeFieldNumber;

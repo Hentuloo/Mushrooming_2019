@@ -44,7 +44,7 @@ const Settings = {
         container: document.querySelector('.game__gif-container'),
         image: document.querySelector('.game__gif-image'),
         number: document.querySelector('.game__gif-number'),
-        gifContainerClass: 'game__gif-container ',
+        gifContainerClass: 'game__gif-container',
         numberHideClass: 'game__gif-number--hide',
         containerHideClass: 'game__gif-container--hide',
     },

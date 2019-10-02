@@ -84,6 +84,7 @@ class Game {
                         interfaceWrapper: interfaceBar,
                         fieldsWrappers: _BattleMap.fieldsWrappers,
                         gameSpeed: settings.speed,
+                        gameMapContainer,
                         ...pawnConfig,
                     }),
             );
