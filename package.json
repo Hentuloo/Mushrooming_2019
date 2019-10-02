@@ -32,7 +32,7 @@
     "scripts": {
         "start": " webpack-dev-server --config ./config/webpack.config.js",
         "develop": "webpack --config ./config/webpack.config.js",
-        "build": "webpack --config ./config/webpack.config.produc.js"
+        "build": "webpack --config ./config/webpack.config.prod.js"
     },
     "repository": {
         "type": "git",

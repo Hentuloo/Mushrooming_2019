@@ -45,7 +45,7 @@ class Pawn {
             }
         });
 
-        this.movementSpeed = 10;
+        this.movementSpeed = chooseMovementSpeed();
 
         this.updateStatPanel = checkTop => {
             //create stat panel (in initial step)

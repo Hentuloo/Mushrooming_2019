@@ -5,12 +5,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: {
         main: './src/scripts/main.js',
     },
     output: {
-        filename: '[name].js',
+        filename: '[contenthash:12]-[name].js',
         path: path.resolve(__dirname, '../', 'build'),
     },
     module: {
@@ -23,20 +23,15 @@ module.exports = {
                 },
             },
             {
-                test: /\.(css|scss)$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                    },
-                    { loader: 'style-loader' },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                        },
-                    },
-                    { loader: 'sass-loader' },
-                ],
+                test: /\.(png|jpe?g|gif)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: 'assets/images/[contenthash:6]-[name].[ext]',
+                },
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
         ],
     },
@@ -47,13 +42,8 @@ module.exports = {
             template: 'src/index.html',
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].css',
+            filename: '[contenthash:12]-[name].css',
         }),
         new CopyPlugin([{ from: 'src/assets', to: 'assets' }]),
     ],
-    devServer: {
-        // publicPath: path.join(__dirname, '../', 'build'),
-        port: 9000,
-        open: true,
-    },
 };
