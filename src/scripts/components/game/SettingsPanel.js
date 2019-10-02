@@ -104,3 +104,4 @@ class SettingsPanel {
         element.dataset.keyCode = event.keyCode;
     };
 }
+export default SettingsPanel;

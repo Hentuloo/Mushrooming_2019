@@ -55,3 +55,4 @@ class SpecialFieldFunc {
         };
     }
 }
+export default SpecialFieldFunc;

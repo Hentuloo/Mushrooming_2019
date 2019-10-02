@@ -264,3 +264,4 @@ class Pawn {
         this.activeFieldNumber = () => _activeFieldNumber;
     }
 }
+export default Pawn;

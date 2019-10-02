@@ -1,5 +1,7 @@
 import Settings from './settings/Settings.js';
 
+import SettingsPanel from './components/game/SettingsPanel.js';
+
 class StartGame {
     constructor({ generalConfig, gameInstance, swipperInstantion }) {
         this.generalConfig = generalConfig;

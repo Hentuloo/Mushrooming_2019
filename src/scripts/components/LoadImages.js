@@ -1,3 +1,5 @@
+import gifsSettings from '../settings/gifsSettings.js';
+
 class LoadImages {
     constructor() {
         let _indexForImages = 0;
@@ -55,3 +57,4 @@ class LoadImages {
         };
     }
 }
+export default LoadImages;

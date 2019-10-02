@@ -106,3 +106,5 @@ class GifAlert {
         this.changeEnable = flag => (_enableGifs = flag);
     }
 }
+
+export default GifAlert;

@@ -1,3 +1,14 @@
+import gifsSettings from '../../settings/gifsSettings.js';
+import fieldsInit from '../../settings/fieldsInit.js';
+
+import Fields from './Fields.js';
+import GifAlert from '../GifAlert.js';
+import BattleMap from './BattleMap.js';
+import Dice from './Dice.js';
+import SpecialFieldFunc from './SpecialFieldFunc.js';
+import Alert from '../Alert.js';
+import Pawn from './Pawn.js';
+
 class Game {
     constructor({
         gifConfig,
@@ -12,7 +23,10 @@ class Game {
         //load fields
         this.Fields = new Fields(fieldsInit);
         //load gift component
-        const _GifAlert = new GifAlert(gifConfig);
+        const _GifAlert = new GifAlert({
+            ...gifConfig,
+            settings: gifsSettings,
+        });
         //load map
         const _BattleMap = new BattleMap({
             ...batleMapConfig,
@@ -296,4 +310,4 @@ class Game {
         };
     }
 }
-//koniec gierki alert
+export default Game;

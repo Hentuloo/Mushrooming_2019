@@ -417,3 +417,4 @@ let fieldsInit = {
         },
     ],
 };
+export default fieldsInit;

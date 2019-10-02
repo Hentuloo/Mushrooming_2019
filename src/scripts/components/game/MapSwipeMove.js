@@ -79,3 +79,4 @@ class MapSwipeMove {
         _container.addEventListener('touchmove', this.mapClickMove);
     }
 }
+export default MapSwipeMove;

@@ -74,3 +74,4 @@ class Alert {
         };
     }
 }
+export default Alert;

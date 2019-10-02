@@ -101,3 +101,4 @@ class Swipper {
         }
     };
 }
+export default Swipper;

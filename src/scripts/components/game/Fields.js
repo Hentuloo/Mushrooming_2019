@@ -27,3 +27,4 @@ class Fields {
         };
     }
 }
+export default Fields;

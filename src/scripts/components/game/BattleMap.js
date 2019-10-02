@@ -94,3 +94,5 @@ class BattleMap {
         return itemImg;
     };
 }
+
+export default BattleMap;

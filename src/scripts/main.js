@@ -1,5 +1,12 @@
+import '../stylesheets/main.scss';
+
 import Settings from './settings/Settings.js';
 import StartGame from './StartGame.js';
+
+import Swipper from './components/Swipper.js';
+import MapSwipeMove from './components/game/MapSwipeMove.js';
+import LoadImages from './components/LoadImages.js';
+import Game from './components/game/Game.js';
 
 window.onbeforeunload = function() {
     window.scrollTo(0, 0);

@@ -41,7 +41,6 @@ const Settings = {
         gameType: 'normal',
     },
     gifConfig: {
-        settings: gifsSettings,
         container: document.querySelector('.game__gif-container'),
         image: document.querySelector('.game__gif-image'),
         number: document.querySelector('.game__gif-number'),

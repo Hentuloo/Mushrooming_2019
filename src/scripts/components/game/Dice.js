@@ -46,3 +46,4 @@ class Dice {
         this.changeNumberFlag = flag => (_numberFlag = flag);
     }
 }
+export default Dice;
