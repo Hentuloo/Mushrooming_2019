@@ -16,6 +16,11 @@ const Settings = {
         },
         interfaceBar: document.querySelector('.game__interface-top-bar'),
     },
+    LoadingPageConfig: {
+        container: document.querySelector('.loadingPage'),
+        hiddenClass: 'loadingPage--hidden',
+        trigger: 'singleArrow.png',
+    },
     PanelConfig: {
         players: [...document.querySelectorAll('.settings__player')],
         game: document.querySelector('.settings__game'),
@@ -85,6 +90,12 @@ const Settings = {
     mapSwipeMoveConfig: {
         container: document.querySelector('.game__map-items-wrapper'),
         transitionClass: 'game__map-items-wrapper--transition',
+    },
+    loadImagesConfig: {
+        firstInQueue: [
+            './assets/images/singleArrow.png',
+            './assets/images/map.png',
+        ],
     },
 };
 export default Settings;

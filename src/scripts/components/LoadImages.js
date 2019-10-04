@@ -1,7 +1,10 @@
 import gifsSettings from '../settings/gifsSettings.js';
 
 class LoadImages {
-    constructor() {
+    constructor({ closeLoadingPage, closeTrigger, firstInQueue }) {
+        this.closeTrigger = closeTrigger;
+        this.closeLoadingPage = closeLoadingPage;
+
         let _indexForImages = 0;
         let _indexForGifs = 0;
 
@@ -17,6 +20,10 @@ class LoadImages {
                 const imgElement = imgs[_indexForImages];
                 img.src = imgElement.dataset.src;
                 img.onload = () => {
+                    if (imgElement.dataset.src.includes(this.closeTrigger)) {
+                        this.closeLoadingPage();
+                    }
+
                     _indexForImages++;
 
                     imgElement.nodeName === 'IMG' &&

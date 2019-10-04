@@ -10,7 +10,6 @@ Configuration:
 
 ## To do:
 
--   optimize images
+-   optimize images and gifs
 -   separate class (example: in my opinion Pawn.js class should be saved in at least two similar classes in individual folder)
--   add loading page if optymalize images doesn't help
 -   create package based on this project for board game (+create redable api)
