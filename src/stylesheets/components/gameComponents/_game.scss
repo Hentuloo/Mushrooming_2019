@@ -274,8 +274,6 @@
 
     &__video-container {
         position: fixed;
-        width: 80%;
-        height: 30vh;
         max-width: 480px;
         left: 50%;
         top: 20%;
@@ -284,14 +282,11 @@
         z-index: 13;
 
 
-        @include mediaQuery(xsmall) {
-            width: 50%;
-
-        }
+        @include mediaQuery(xsmall) {}
 
         @include mediaQuery(small) {
             top: 15%;
-            width: 40%;
+
         }
 
         @include mediaQuery(medium) {

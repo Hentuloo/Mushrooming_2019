@@ -73,7 +73,6 @@ class VideoAlert {
                 _videoTag.alt = this.alt;
             }
             if (this.number) {
-                console.log(_videoNumber);
                 _videoNumber.innerText = this.number;
                 _videoNumber.classList.add(numberHideClass);
                 setTimeout(() => {
@@ -83,16 +82,24 @@ class VideoAlert {
                 _videoNumber.innerText = '';
             }
             //add special type
-
+            console.log(_videoTag);
             if (
                 this.containerModifier === 'normal' ||
                 this.containerModifier === undefined
             ) {
-                _videoContainer.setAttribute(
-                    'class',
-                    `${videoContainerClass}
-                    ${!_active ? containerHideClass : ''}`,
-                );
+                if (!_active) {
+                    _videoTag.play();
+                    _videoContainer.setAttribute(
+                        'class',
+                        `${videoContainerClass} ${containerHideClass}`,
+                    );
+                } else {
+                    _videoTag.pause();
+                    _videoContainer.setAttribute(
+                        'class',
+                        `${videoContainerClass}`,
+                    );
+                }
             } else {
                 _videoContainer.classList.add(
                     `${videoContainerClass}--${this.containerModifier}`,
