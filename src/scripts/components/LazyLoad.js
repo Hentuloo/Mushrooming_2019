@@ -1,15 +1,16 @@
-import gifsSettings from '../settings/gifsSettings.js';
+import viedoSettings from '../settings/videoSettings.js';
 
-class LoadImages {
+class LazyLoad {
     constructor({ closeLoadingPage, closeTrigger, firstInQueue }) {
         this.closeTrigger = closeTrigger;
         this.closeLoadingPage = closeLoadingPage;
+        this.firstInQueue = firstInQueue;
 
         let _indexForImages = 0;
-        let _indexForGifs = 0;
+        let _indexForViedos = 0;
 
         const imgs = [...document.querySelectorAll('[data-src]')];
-        const gifs = Object.values(gifsSettings).reduce(
+        const gifs = Object.values(viedoSettings).reduce(
             (prev, current) => [...prev, ...current],
             [],
         );
@@ -36,18 +37,18 @@ class LoadImages {
             }
         };
         this.loadGifs = () => {
-            if (gifs.length > _indexForGifs) {
-                const img = new Image();
-                const imgElement = gifs[_indexForGifs];
-                img.src = imgElement.src;
-                img.onload = () => {
-                    _indexForGifs++;
+            if (gifs.length > _indexForViedos) {
+                const video = document.createElement('video');
+                const videoElement = gifs[_indexForViedos];
+                video.src = videoElement.src;
+                video.onload = () => {
+                    _indexForViedos++;
                     return this.loadSync();
                 };
             }
         };
-        this.imagesPushFirst = newImages => {
-            newImages.forEach(image => {
+        this.imagesPushFirst = () => {
+            this.firstInQueue.forEach(image => {
                 //find the same imgae
                 const index = imgs.findIndex(
                     singleImage => singleImage.dataset.src === image,
@@ -64,4 +65,4 @@ class LoadImages {
         };
     }
 }
-export default LoadImages;
+export default LazyLoad;

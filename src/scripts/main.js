@@ -6,7 +6,7 @@ import StartGame from './StartGame.js';
 import LoadingPage from './components/LoadingPage.js';
 import Swipper from './components/Swipper.js';
 import MapSwipeMove from './components/game/MapSwipeMove.js';
-import LoadImages from './components/LoadImages.js';
+import LazyLoad from './components/LazyLoad.js';
 import Game from './components/game/Game.js';
 
 window.onbeforeunload = function() {
@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
         generalConfig,
         LoadingPageConfig,
         initialGameSettings,
-        gifConfig,
+        videoConfig,
         batleMapConfig,
         diceConfig,
         alertConfig,
         pawnConfig,
         mapSwipeMoveConfig,
-        loadImagesConfig,
+        lazyLoadConfig,
     } = Settings;
 
     const loadingPage = new LoadingPage(LoadingPageConfig);
@@ -37,16 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
     new MapSwipeMove(mapSwipeMoveConfig);
 
     //load all images in first that:
-    const loadImagesInstantion = new LoadImages({
-        ...loadImagesConfig,
+    const LazyLoadInstantion = new LazyLoad({
+        ...lazyLoadConfig,
         closeTrigger: LoadingPageConfig.trigger,
         closeLoadingPage: loadingPage.close,
     });
-    loadImagesInstantion.imagesPushFirst(loadImagesConfig.firstInQueue);
-    loadImagesInstantion.loadSync();
+    LazyLoadInstantion.imagesPushFirst();
+    LazyLoadInstantion.loadSync();
 
     let gameInstance = new Game({
-        gifConfig,
+        videoConfig,
         batleMapConfig,
         diceConfig,
         alertConfig,

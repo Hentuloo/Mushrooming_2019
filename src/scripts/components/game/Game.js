@@ -1,8 +1,8 @@
-import gifsSettings from '../../settings/gifsSettings.js';
+import videoSettings from '../../settings/videoSettings.js';
 import fieldsInit from '../../settings/fieldsInit.js';
 
 import Fields from './Fields.js';
-import GifAlert from '../GifAlert.js';
+import VideoAlert from '../VideoAlert.js';
 import BattleMap from './BattleMap.js';
 import Dice from './Dice.js';
 import SpecialFieldFunc from './SpecialFieldFunc.js';
@@ -11,7 +11,7 @@ import Pawn from './Pawn.js';
 
 class Game {
     constructor({
-        gifConfig,
+        videoConfig,
         batleMapConfig,
         diceConfig,
         alertConfig,
@@ -22,10 +22,10 @@ class Game {
 
         //load fields
         this.Fields = new Fields(fieldsInit);
-        //load gift component
-        const _GifAlert = new GifAlert({
-            ...gifConfig,
-            settings: gifsSettings,
+        //load video component
+        const _VideoAlert = new VideoAlert({
+            ...videoConfig,
+            settings: videoSettings,
         });
         //load map
         const _BattleMap = new BattleMap({
@@ -97,8 +97,8 @@ class Game {
                 userId: el.id,
             }));
 
-            //when gifs aren't enable change diceThrowedDelay
-            _GifAlert.changeEnable(settings.special);
+            //when video aren't enable change diceThrowedDelay
+            _VideoAlert.changeEnable(settings.special);
             _Dice.changeNumberFlag(!settings.special);
             diceThrowedDelay = settings.special ? diceThrowedDelay : 300;
 
@@ -154,8 +154,8 @@ class Game {
             _Dice.throw();
             _Dice.diceSwitchStatus(false);
             //show alert with number
-            _GifAlert.newRandomGift({
-                gifGroup: 'diceThrow',
+            _VideoAlert.newRandomVideo({
+                videoGroup: 'diceThrow',
                 modifier: 'normal',
                 number: _Dice.getNumber(),
             });
@@ -169,7 +169,7 @@ class Game {
 
             //return specify field properties
             const currentField = this.Fields.checkField(playerNumberOfField);
-            const { type, gifGroup, lastField } = currentField;
+            const { type, videoGroup, lastField } = currentField;
 
             //check the type of field
             if (type === 'natural') {
@@ -178,8 +178,8 @@ class Game {
                 //change flag because special function can may last longer(addeventListener)
                 _activeRound = false;
                 //show alert with css-modifier
-                _GifAlert.newRandomGift({
-                    gifGroup,
+                _VideoAlert.newRandomVideo({
+                    videoGroup,
                     modifier: 'with-alert',
                 });
 
@@ -206,9 +206,9 @@ class Game {
             ) {
                 const { value, index } = currentField;
 
-                if (gifGroup && value) {
-                    _GifAlert.newRandomGift({
-                        gifGroup,
+                if (videoGroup && value) {
+                    _VideoAlert.newRandomVideo({
+                        videoGroup,
                         modifier: 'plant-field',
                     });
                 }

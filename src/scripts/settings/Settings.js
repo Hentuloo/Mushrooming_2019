@@ -45,13 +45,13 @@ const Settings = {
         newRoundDelay: 500,
         gameType: 'normal',
     },
-    gifConfig: {
-        container: document.querySelector('.game__gif-container'),
-        image: document.querySelector('.game__gif-image'),
-        number: document.querySelector('.game__gif-number'),
-        gifContainerClass: 'game__gif-container',
-        numberHideClass: 'game__gif-number--hide',
-        containerHideClass: 'game__gif-container--hide',
+    videoConfig: {
+        container: document.querySelector('.game__video-container'),
+        video: document.querySelector('.game__video-image'),
+        number: document.querySelector('.game__video-number'),
+        videoContainerClass: 'game__video-container',
+        numberHideClass: 'game__video-number--hide',
+        containerHideClass: 'game__video-container--hide',
     },
     batleMapConfig: {
         wrapper: document.querySelector('.game__map-items-wrapper'), //game map container
@@ -91,7 +91,7 @@ const Settings = {
         container: document.querySelector('.game__map-items-wrapper'),
         transitionClass: 'game__map-items-wrapper--transition',
     },
-    loadImagesConfig: {
+    lazyLoadConfig: {
         firstInQueue: [
             './assets/images/singleArrow.png',
             './assets/images/map.png',

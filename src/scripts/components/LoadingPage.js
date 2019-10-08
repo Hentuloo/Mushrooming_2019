@@ -4,7 +4,6 @@ class LoadingPage {
         this.hiddenClass = hiddenClass;
     }
     close = () => {
-        console.log(this.container);
         this.container.classList.add(this.hiddenClass);
     };
     open = () => {
