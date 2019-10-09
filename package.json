@@ -7,10 +7,6 @@
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "core-js": "^2.6.9",
-<<<<<<< HEAD
-=======
-        "scroll-into-view": "^1.9.7",
->>>>>>> 87252816cb7bda9fd067e2cce4200919915c0b95
         "smooth-scroll-into-view-if-needed": "^1.1.23",
         "webpack-dev-server": "^3.8.1"
     },

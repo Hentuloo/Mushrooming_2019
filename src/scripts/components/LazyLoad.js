@@ -10,7 +10,7 @@ class LazyLoad {
         let _indexForViedos = 0;
 
         const imgs = [...document.querySelectorAll('[data-src]')];
-        const gifs = Object.values(viedoSettings).reduce(
+        const videos = Object.values(viedoSettings).reduce(
             (prev, current) => [...prev, ...current],
             [],
         );
@@ -33,13 +33,14 @@ class LazyLoad {
                     return this.loadSync();
                 };
             } else {
-                this.loadGifs();
+                this.loadViedos();
             }
         };
-        this.loadGifs = () => {
-            if (gifs.length > _indexForViedos) {
+        this.loadViedos = () => {
+            if (videos.length > _indexForViedos) {
+                debugger;
                 const video = document.createElement('video');
-                const videoElement = gifs[_indexForViedos];
+                const videoElement = videos[_indexForViedos];
                 video.src = videoElement.src;
                 video.onload = () => {
                     _indexForViedos++;
