@@ -1,4 +1,4 @@
-import scrollIntoView from 'scroll-into-view';
+import scrollIntoView from 'smooth-scroll-into-view-if-needed';
 
 class Pawn {
     constructor({
@@ -47,25 +47,12 @@ class Pawn {
 
         this.movementSpeed = chooseMovementSpeed();
 
-        this.updateStatPanel = checkTop => {
+        this.updateStatPanel = () => {
             //create stat panel (in initial step)
             if (!_pawnStatSelf) this.firstTimeDrawStatPanel();
 
             //check the active flag
             if (_pawnActive) {
-                scrollIntoView(_activeFieldElement, {}, () => {
-                    if (!checkTop) {
-                        const {
-                            top,
-                        } = this.gameMapContainer.getBoundingClientRect();
-                        if (top > 0) {
-                            window.scrollTo({
-                                top: window.pageYOffset + top,
-                                behavior: 'smooth',
-                            });
-                        }
-                    }
-                });
                 _pawnStatSelf.classList.add(statActiveClass);
                 _pawnElement.classList.add(pawnActiveClass);
             } else {
@@ -105,53 +92,82 @@ class Pawn {
             _fieldsWrappers[_activeFieldNumber].appendChild(_pawnElement);
             _activeFieldElement = _fieldsWrappers[_activeFieldNumber];
 
-            _activeFieldElement.scrollIntoView({
+            scrollIntoView(_activeFieldElement, {
+                scrollMode: 'if-needed',
                 behavior: 'smooth',
-                block: 'center',
-                inline: 'center',
+                block: 'nearest',
+                inline: 'nearest',
+                duration: 1200,
             });
         };
+
         this.moveSync = async number => {
-            let intervalTimesRun = 0;
-            let interval;
-            let changeDirection = false;
-            await new Promise(resolve => {
-                interval = setInterval(() => {
-                    //check number of literals
-                    if (intervalTimesRun >= Math.abs(number) - 1) {
-                        //delete all plant from activeField
+            scrollIntoView(_activeFieldElement, {
+                scrollMode: 'if-needed',
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'nearest',
+                duration: 1200,
+            });
+            return new Promise(resolve => {
+                //start movePromis when _actieveField is Observe
+                const intersectionObserver = new IntersectionObserver(
+                    entries => {
+                        let [entry] = entries;
+                        if (entry.isIntersecting) {
+                            return movePromis();
+                        }
+                    },
+                );
 
-                        this.removePlantsFromCurrentField(
-                            changeDirection ? -number : number,
-                        );
-                        clearInterval(interval);
-                        resolve(true);
-                    }
-                    //clear pawn in previous field
-                    _activeFieldElement.removeChild(_pawnElement);
+                // start observing
+                intersectionObserver.observe(_activeFieldElement);
 
-                    //change flag if pawn is on the end of map
-                    if (
-                        _activeFieldNumber === _fieldsWrappers.length - 2 &&
-                        changeDirection === false
-                    ) {
-                        _activeFieldNumber += 2;
-                        changeDirection = true;
-                    }
+                const movePromis = () => {
+                    //end observing and move
+                    intersectionObserver.unobserve(_activeFieldElement);
+                    let intervalTimesRun = 0;
+                    let interval;
+                    let changeDirection = false;
 
-                    if (changeDirection) {
-                        --_activeFieldNumber;
-                    } else {
-                        number > 0
-                            ? ++_activeFieldNumber
-                            : --_activeFieldNumber;
-                    }
+                    interval = setInterval(() => {
+                        //check number of literals
+                        if (intervalTimesRun >= Math.abs(number) - 1) {
+                            //delete all plant from activeField
 
-                    //draw pawn in new field
-                    this.drawPawn();
-                    //increment literals number
-                    intervalTimesRun++;
-                }, this.movementSpeed);
+                            this.removePlantsFromCurrentField(
+                                changeDirection ? -number : number,
+                            );
+                            clearInterval(interval);
+                            resolve(true);
+                        }
+                        //clear pawn in previous field
+                        _activeFieldElement.removeChild(_pawnElement);
+
+                        //change flag if pawn is on the end of map
+                        if (
+                            _activeFieldNumber === _fieldsWrappers.length - 2 &&
+                            changeDirection === false
+                        ) {
+                            _activeFieldNumber += 2;
+                            changeDirection = true;
+                        }
+
+                        if (changeDirection) {
+                            --_activeFieldNumber;
+                        } else {
+                            number > 0
+                                ? ++_activeFieldNumber
+                                : --_activeFieldNumber;
+                        }
+
+                        //draw pawn in new field
+                        this.drawPawn();
+
+                        //increment literals number
+                        intervalTimesRun++;
+                    }, this.movementSpeed);
+                };
             });
         };
         this.newItem = (type, value, fieldTypes) => {
@@ -270,7 +286,7 @@ class Pawn {
         this.getPointsNumber = () => _points + _extraPoints;
         this.activeStatus = flag => {
             _pawnActive = flag;
-            if (flag) this.updateStatPanel(flag);
+            if (flag) this.updateStatPanel();
         };
         this.getId = () => _id;
         this.activeFieldNumber = () => _activeFieldNumber;
