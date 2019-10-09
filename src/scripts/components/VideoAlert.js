@@ -68,6 +68,7 @@ class VideoAlert {
             if (!_enableVideos) return;
             if (this.src) {
                 _videoTag.src = this.src;
+                // debugger;
             }
             if (this.alt) {
                 _videoTag.alt = this.alt;

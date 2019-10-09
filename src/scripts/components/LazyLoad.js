@@ -38,13 +38,19 @@ class LazyLoad {
         };
         this.loadViedos = () => {
             if (videos.length > _indexForViedos) {
-                debugger;
                 const video = document.createElement('video');
                 const videoElement = videos[_indexForViedos];
                 video.src = videoElement.src;
-                video.onload = () => {
-                    _indexForViedos++;
-                    return this.loadSync();
+                video.autoplay = true;
+
+                video.onloadstart = () => {
+                    console.log(video.src);
+                };
+                video.load();
+                video.onloadeddata = () => {
+                    _indexForViedos += 1;
+                    video.pause();
+                    return this.loadViedos();
                 };
             }
         };

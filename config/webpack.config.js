@@ -26,7 +26,7 @@ module.exports = {
                 test: /\.(png|jpe?g|gif)$/i,
                 loader: 'file-loader',
                 options: {
-                    name: 'assets/images/[contenthash:6]-[name].[ext]',
+                    name: 'assets/images/[name].[ext]',
                 },
             },
             {

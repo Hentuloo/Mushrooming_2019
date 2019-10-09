@@ -94,6 +94,7 @@ const Settings = {
     lazyLoadConfig: {
         firstInQueue: [
             './assets/images/singleArrow.png',
+            './assets/images/arrowNavigation.png',
             './assets/images/map.png',
         ],
     },
