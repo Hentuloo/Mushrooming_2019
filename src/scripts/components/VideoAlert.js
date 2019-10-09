@@ -82,7 +82,6 @@ class VideoAlert {
                 _videoNumber.innerText = '';
             }
             //add special type
-            console.log(_videoTag);
             if (
                 this.containerModifier === 'normal' ||
                 this.containerModifier === undefined
