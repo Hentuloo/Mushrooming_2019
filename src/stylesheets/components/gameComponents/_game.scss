@@ -13,9 +13,13 @@
         height: 100%;
         top: 0%;
         left: 0vw;
-        background-image: url('../assets/images/map.png');
         filter: blur(8px);
         z-index: 0;
+        background-image: url('../assets/images/map-1000w.png');
+
+        @include mediaQuery(small) {
+            background-image: url('../assets/images/map-1920w.png');
+        }
     }
 
     &--map-only {

@@ -1,0 +1,7 @@
+{
+  "eslintIntegration": true,
+  "singleQuote": true,
+  "printWidth": 70,
+  "trailingComma": "all",
+  "html.format.wrapLineLength": 30
+}

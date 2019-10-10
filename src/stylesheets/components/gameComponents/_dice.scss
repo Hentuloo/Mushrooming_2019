@@ -16,10 +16,13 @@
             top: 0%;
             left: 0%;
 
-            background-image: url(../assets/images/dice.png);
+            background-image: url('../assets/images/dice-275w.png');
             background-size: 100% 100%;
             transition: 0.2s;
 
+            @include mediaQuery(xsmall) {
+                background-image: url('../assets/images/dice-550w.png');
+            }
         }
 
 

@@ -3,32 +3,34 @@ import Settings from './settings/Settings.js';
 import SettingsPanel from './components/game/SettingsPanel.js';
 
 class StartGame {
-    constructor({ generalConfig, gameInstance, swipperInstantion }) {
-        this.generalConfig = generalConfig;
-        this.startButton = document.querySelector(generalConfig.startButton);
+  constructor({ generalConfig, gameInstance, swipperInstantion }) {
+    this.generalConfig = generalConfig;
+    this.startButton = document.querySelector(
+      generalConfig.startButton,
+    );
 
-        this.gameInstance = gameInstance;
-        this.swipperInstantion = swipperInstantion;
+    this.gameInstance = gameInstance;
+    this.swipperInstantion = swipperInstantion;
 
-        this.startButton.addEventListener('click', this.startGame);
-    }
+    this.startButton.addEventListener('click', this.startGame);
+  }
 
-    startGame = () => {
-        const { PanelConfig } = Settings;
-        const settingsPage = new SettingsPanel(PanelConfig);
+  startGame = () => {
+    const { PanelConfig } = Settings;
+    const settingsPage = new SettingsPanel(PanelConfig);
 
-        // turn of page swipper
-        this.swipperInstantion.changeScrollFlag(false);
+    // turn of page swipper
+    this.swipperInstantion.changeScrollFlag(false);
 
-        const settingsValues = settingsPage.geAllSettingsFromPage();
-        //settingsPage validator (coming soon)
-        if (!settingsValues.players.length) return;
+    const settingsValues = settingsPage.geAllSettingsFromPage();
+    //settingsPage validator (coming soon)
+    if (!settingsValues.players.length) return;
 
-        this.gameInstance.initialStartGame({
-            ...settingsValues,
-            ...this.generalConfig,
-        });
-        this.startButton.removeEventListener('click', this.startGame);
-    };
+    this.gameInstance.initialStartGame({
+      ...settingsValues,
+      ...this.generalConfig,
+    });
+    this.startButton.removeEventListener('click', this.startGame);
+  };
 }
 export default StartGame;

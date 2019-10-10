@@ -7,10 +7,13 @@
 
     @include mediaQuery(small) {
         width: 40vw;
-        background-image: url('../assets/images/mushroomPatern.png');
+        background-image: url('../assets/images/mushroomPatern-450w.png');
         background-size: 30% 20%;
         background-position: -10% -10%;
 
+        @include mediaQuery(medium) {
+            background-image: url('../assets/images/mushroomPatern-900w.png');
+        }
     }
 
     &__button {
