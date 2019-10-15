@@ -91,7 +91,6 @@
         display: block;
         left: 0%;
         top: 110%;
-        overflow: hidden;
 
 
 
@@ -122,7 +121,6 @@
     &__map-wrapper {
         display: inline-block;
         cursor: grab;
-        overflow: hidden;
         transform: scale(0.5) translate(-60%, -60%);
 
         @include mediaQuery(small) {
@@ -166,15 +164,19 @@
     &__item-wrapper {
         position: absolute;
         display: grid;
+        max-width: 120px;
+        min-width: 20px;
+        height: 80px;
         grid-template-columns: repeat(auto-fit, minmax(auto, 60px));
         grid-auto-flow: column;
         align-items: center;
         justify-content: center;
-        max-width: 120px;
-        height: 80px;
-        top: 0%;
-        left: 0%;
+        top: -50px;
+        left: -50px;
+        box-sizing: content-box;
+        padding: 50px;
         z-index: 10;
+
     }
 
     &__item-image {
