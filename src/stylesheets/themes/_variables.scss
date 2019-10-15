@@ -32,4 +32,5 @@ $breakpoints:(xsmall:'(min-width: 460px)',
     medium:'(min-width:1024px)',
     large:'(min-width:1200px)',
     xlarge:'(min-width:1400px)',
+    mobileLandscape:'(max-width: 460px) and (orientation: landscape) , (max-height: 450px)',
 )

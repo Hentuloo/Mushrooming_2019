@@ -7,11 +7,20 @@
     position: relative;
     background-color: $bg-color;
     z-index: 10;
+
     // padding: 10vh 20px;
+
 
     @include mediaQuery(small) {
         padding: 0px 15vw;
 
+    }
+
+    @include mediaQuery(mobileLandscape) {
+        overflow-y: scroll;
+        padding-bottom: 50px;
+        box-sizing: content-box;
+        padding-bottom: 30px;
     }
 
     @include mediaQuery(medium) {
@@ -43,6 +52,10 @@
         padding: 0px 8px;
         margin: 0px auto;
         border: 1px $black solid;
+
+        @include mediaQuery(mobileLandscape) {
+            min-height: 20px;
+        }
 
         @include mediaQuery(small) {
             border: none;
@@ -88,6 +101,10 @@
         min-height: 40px;
         background-color: $gray;
         border: none;
+
+        @include mediaQuery(mobileLandscape) {
+            min-height: 20px;
+        }
 
         @include mediaQuery(small) {
             font-size: map-get($font, m);
