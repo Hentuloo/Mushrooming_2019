@@ -17,28 +17,43 @@ class LazyLoad {
 
     this.loadSync = () => {
       if (imgs.length > _indexForImages) {
-        const img = new Image();
         const imgElement = imgs[_indexForImages];
-        if (imgElement.dataset.srcset) {
-          img.setAttribute('srcset', imgElement.dataset.srcset);
-        }
-        if (imgElement.dataset.sizes) {
-          img.setAttribute('sizes', imgElement.dataset.sizes);
-        }
+        _indexForImages++;
 
-        img.src = imgElement.dataset.src;
-        img.onload = () => {
+        var image = new Image();
+        image.onload = ss => {
           if (imgElement.dataset.src.includes(this.closeTrigger)) {
             this.closeLoadingPage();
           }
 
-          _indexForImages++;
+          //set srcset and delete data-srcset
+          if (imgElement.dataset.srcset) {
+            imgElement.srcset = imgElement.dataset.srcset;
+            delete imgElement.dataset.srcset;
+          }
 
-          imgElement.nodeName === 'IMG' &&
-            (imgElement.src = imgElement.dataset.src);
+          //set sizes and delete data-sizes
+          if (imgElement.dataset.sizes) {
+            imgElement.sizes = imgElement.dataset.sizes;
+            delete imgElement.dataset.sizes;
+          }
 
-          return this.loadSync();
+          if (imgElement.dataset.src) {
+            imgElement.src = imgElement.dataset.src;
+            delete imgElement.dataset.src;
+          }
+          this.loadSync();
         };
+
+        if (imgElement.dataset.srcset) {
+          image.srcset = imgElement.dataset.srcset;
+        }
+        if (imgElement.dataset.sizes) {
+          image.sizes = imgElement.dataset.sizes;
+        }
+        if (imgElement.dataset.src) {
+          image.src = imgElement.dataset.src;
+        }
       } else {
         this.loadViedos();
       }

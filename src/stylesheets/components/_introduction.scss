@@ -31,10 +31,11 @@
 
     &__image {
         position: absolute;
-        width: 300px;
-        left: calc(50% - 150px);
+        width: 230px;
+        left: 50%;
         top: 3%;
         z-index: 12;
+        transform: translate(-50%);
 
         @include mediaQuery(small) {
             background-color: $white;

@@ -4,7 +4,7 @@ let fieldsInit = {
       type: 'mushroomGood',
       srcset:
         './assets/images/mushroomGood-158w.png 158w, ./assets/images/mushroomGood-315w.png 315w',
-      sizes: '(max-width: 480px) 140px, 315px',
+      sizes: '(max-width: 480px) 90px, 315px',
       src: './assets/images/mushroomGood-315w.png',
       value: 2,
       alt: 'Dobry grzyb',
@@ -13,7 +13,7 @@ let fieldsInit = {
       type: 'mushroomWrong',
       srcset:
         './assets/images/mushroomWrong-150w.png 150w, ./assets/images/mushroomWrong-300w.png 300w',
-      sizes: '(max-width: 480px) 130px, 300px',
+      sizes: '(max-width: 480px) 90px, 300px',
       src: './assets/images/mushroomWrong-300w.png',
       value: -6,
       alt: 'Zły grzyb',
@@ -22,7 +22,7 @@ let fieldsInit = {
       type: 'raspberry',
       srcset:
         './assets/images/raspberry-150w.png 150w, ./assets/images/raspberry-300w.png 300w',
-      sizes: '(max-width: 480px) 130px, 300px',
+      sizes: '(max-width: 480px) 90px, 300px',
       src: './assets/images/raspberry-300w.png',
       value: 4,
       alt: 'Dobra borówka',

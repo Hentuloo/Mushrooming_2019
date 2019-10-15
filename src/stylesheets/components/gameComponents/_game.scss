@@ -15,11 +15,7 @@
         left: 0vw;
         filter: blur(8px);
         z-index: 0;
-        background-image: url('../assets/images/map-1000w.png');
-
-        @include mediaQuery(small) {
-            background-image: url('../assets/images/map-1920w.png');
-        }
+        background-image: url('../assets/images/map-1920w.png');
     }
 
     &--map-only {
@@ -59,7 +55,7 @@
 
         .game__map-wrapper {
             position: relative;
-            transform: scale(0.7) translate(-30%, -30%);
+            transform: scale(0.5) translate(-60%, -53%);
 
             @include mediaQuery(small) {
                 transform: scale(0.75) translate(-25%, -20%);
@@ -109,8 +105,9 @@
 
         .game__map-wrapper {
             display: block;
-            // transform: scale(1);
 
+            // transform: scale(1);
+            .game__map-wrapper {}
 
         }
 
@@ -126,6 +123,11 @@
         display: inline-block;
         cursor: grab;
         overflow: hidden;
+        transform: scale(0.5) translate(-60%, -60%);
+
+        @include mediaQuery(small) {
+            transform: none;
+        }
     }
 
     &__map-items-wrapper {
